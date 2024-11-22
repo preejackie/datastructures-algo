@@ -9,7 +9,8 @@ using namespace std;
    dfsPath helps us to eliminate non-cycles found by backedge detection
    algorithm for undirected graph.
 */
-bool checkCycle(const vector<vector<int>>  &graph, vector<bool> &visited, vector<bool> &dfsPath, int root) {
+bool checkCycle(const vector<vector<int>> &graph, vector<bool> &visited,
+                vector<bool> &dfsPath, int root) {
   visited[root] = true;
   dfsPath[root] = true;
   bool ok = false;
@@ -28,11 +29,12 @@ bool detectCycle(const vector<vector<int>> &graph) {
   int n = graph.size();
   bool ok = false;
   vector<bool> visited(n, false), dfsPath(n, false);
-  for (int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if (visited[i])
       continue;
     ok |= checkCycle(graph, visited, dfsPath, i);
-    if (ok) return ok;
+    if (ok)
+      return ok;
   }
   return ok;
 }

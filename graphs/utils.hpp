@@ -1,5 +1,5 @@
-#include<vector>
-#include<unordered_map>
-#include<algorithm>
-#include<stack>
-#include<iostream>
+#include <algorithm>
+#include <iostream>
+#include <stack>
+#include <unordered_map>
+#include <vector>

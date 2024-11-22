@@ -3,20 +3,22 @@ using namespace std;
 
 int maxCycleLen;
 
-bool checkCycle(const vector<vector<int>>  &graph, vector<bool> &visited, vector<bool> &dfsPath, int root,
-            vector<int> &visitNum, int num) {
+bool checkCycle(const vector<vector<int>> &graph, vector<bool> &visited,
+                vector<bool> &dfsPath, int root, vector<int> &visitNum,
+                int num) {
   visited[root] = true;
   dfsPath[root] = true;
   visitNum[root] = num;
   bool ok = false;
   for (const auto &next : graph[root]) {
-    if (dfsPath[next]) { //backedge (root->next) visit number of next < visit number of root.
+    if (dfsPath[next]) { // backedge (root->next) visit number of next < visit
+                         // number of root.
       maxCycleLen = max(maxCycleLen, visitNum[root] - visitNum[next] + 1);
       return true;
     }
     if (visited[next])
       continue;
-    ok |= checkCycle(graph, visited, dfsPath, next, visitNum, num+1);
+    ok |= checkCycle(graph, visited, dfsPath, next, visitNum, num + 1);
   }
   dfsPath[root] = false;
   return ok;
@@ -26,13 +28,14 @@ bool detectCycle(const vector<vector<int>> &graph) {
   int n = graph.size(), num = 0;
   bool ok = false;
   vector<bool> visited(n, false), dfsPath(n, false);
-  vector<int>  visitNum(n, 0);
+  vector<int> visitNum(n, 0);
 
-  for (int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if (visited[i])
       continue;
     ok |= checkCycle(graph, visited, dfsPath, i, visitNum, num);
-    if (ok) return ok;
+    if (ok)
+      return ok;
   }
   return ok;
 }

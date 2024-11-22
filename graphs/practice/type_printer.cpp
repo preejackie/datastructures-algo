@@ -111,7 +111,7 @@ int main() {
   int n, len = 0;
   cin >> n;
   string word, bigword;
-  while(n-- > 0) {
+  while (n-- > 0) {
     cin >> word;
     root->addWord(word);
     if (word.size() > len) {

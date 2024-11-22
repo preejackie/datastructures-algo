@@ -1,11 +1,11 @@
 #include "utils.hpp"
 
-void preprocess(int node) {std::cout << "\n Preprocess: " << node;}
-void postprocess(int node) {std::cout << "\n Postprocess: " << node;}
+void preprocess(int node) { std::cout << "\n Preprocess: " << node; }
+void postprocess(int node) { std::cout << "\n Postprocess: " << node; }
 
 std::vector<int> dfs_impl(const std::vector<std::vector<int>> &graph, int root,
                           std::vector<bool> &in, std::vector<bool> &out) {
-  std::stack<std::pair<int,bool>> st;
+  std::stack<std::pair<int, bool>> st;
   st.push({root, 1});
   st.push({root, 0});
   std::vector<int> order;
@@ -22,10 +22,10 @@ std::vector<int> dfs_impl(const std::vector<std::vector<int>> &graph, int root,
       postprocess(node.first);
       out[node.first] = true;
     }
-    
+
     if (in[node.first])
       continue;
-    
+
     preprocess(node.first);
     in[node.first] = true;
     order.push_back(node.first);

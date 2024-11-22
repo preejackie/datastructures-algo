@@ -1,11 +1,11 @@
 #include "utils.hpp"
 
-void preprocess(int node) {std::cout << "\n Preprocess: " << node;}
-void postprocess(int node) {std::cout << "\n Postprocess: " << node;}
+void preprocess(int node) { std::cout << "\n Preprocess: " << node; }
+void postprocess(int node) { std::cout << "\n Postprocess: " << node; }
 
 std::vector<int> dfs_impl(const std::vector<std::vector<int>> &graph, int root,
                           std::vector<bool> &in, std::vector<bool> &out) {
-  std::stack<std::pair<int,bool>> st;
+  std::stack<std::pair<int, bool>> st;
   st.push({root, 1});
   st.push({root, 0});
   std::vector<int> order;
@@ -14,18 +14,18 @@ std::vector<int> dfs_impl(const std::vector<std::vector<int>> &graph, int root,
     auto node = st.top();
     st.pop();
 
-    //skip if the node is closed; 
+    // skip if the node is closed;
     if (out[node.first])
       continue;
 
-    //close the node if you can.
+    // close the node if you can.
     if (node.second == 1) {
       postprocess(node.first);
       out[node.first] = true;
       continue;
     }
 
-    //open the node
+    // open the node
     preprocess(node.first);
     in[node.first] = true;
     order.push_back(node.first);
@@ -43,7 +43,7 @@ std::vector<int> dfs_impl(const std::vector<std::vector<int>> &graph, int root,
     in this case order should be s->t->v or s->v->t not s->t->s->v
     */
     for (auto &next : graph[node.first]) {
-      //don't open any new nodes if the node is already opened.
+      // don't open any new nodes if the node is already opened.
       if (!in[next]) {
         st.push({next, 1});
         st.push({next, 0});

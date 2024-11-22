@@ -1,13 +1,15 @@
 #include "utils.hpp"
 using namespace std;
 
-bool checkForBackEdge(const vector<vector<int>> &graph, vector<bool> &visited, int root, int parent) {
+bool checkForBackEdge(const vector<vector<int>> &graph, vector<bool> &visited,
+                      int root, int parent) {
   visited[root] = true;
   bool ok = false;
   for (auto &next : graph[root]) {
     if (next == parent)
       continue;
-    if (visited[next]) //in directed graph there could be no path from next to root's predecessor
+    if (visited[next]) // in directed graph there could be no path from next to
+                       // root's predecessor
       return true;
     ok |= checkForBackEdge(graph, visited, next, root);
   }
@@ -18,10 +20,11 @@ bool detectCycle(const vector<vector<int>> &graph) {
   int n = graph.size();
   vector<bool> visited(n, false);
   bool ok = 0;
-  for (int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if (!visited[i])
       ok = checkForBackEdge(graph, visited, i, -1);
-    if (ok) return ok;
+    if (ok)
+      return ok;
   }
   return ok;
 }
